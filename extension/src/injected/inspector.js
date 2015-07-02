@@ -13,6 +13,7 @@
   'use strict';
 
   var
+    $rootScope,
     _angularInjector,
     _isMonitoringActive = true,
     _backUp = {
@@ -236,14 +237,10 @@
    * @returns {angular.scope}
    */
   function getRootScope(){
-    if (typeof $rootScope !== 'undefined') {
-      return $rootScope;
+    if (typeof $rootScope === 'undefined') {
+      $rootScope = _angularInjector('$rootScope');
     }
-    var scopeEl = document.querySelector('.ng-scope');
-    if (!scopeEl) {
-      return null;
-    }
-    return angular.element(scopeEl).scope().$root;
+    return $rootScope;
   }
 
   /**
